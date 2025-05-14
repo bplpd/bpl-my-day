@@ -1,0 +1,27 @@
+<div class="calendar-container">
+  <h1>{{ title }}</h1>
+  
+  <div class="week-grid">
+    <div *ngFor="let day of currentWeek" class="day-cell">
+      <div class="day-header">
+        <h3>{{ day.day }}</h3>
+        <p>{{ day.date | date: 'MMM d' }}</p>
+      </div>
+      
+      <div class="todo-list">
+        <div *ngFor="let todo of day.todos" class="todo-item" [class.completed]="todo.completed">
+          <label class="todo-checkbox">
+            <input type="checkbox" [checked]="todo.completed" (change)="toggleTodo(todo)">
+            <span>{{ todo.text }}</span>
+          </label>
+          <button class="delete-btn" (click)="deleteTodo(todo)">Delete</button>
+        </div>
+      </div>
+      
+      <div class="add-todo">
+        <input #todoInput type="text" placeholder="Add a todo...">
+        <button (click)="addTodo(day, todoInput.value)">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
